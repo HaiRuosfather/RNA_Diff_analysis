@@ -37,13 +37,11 @@
 ## 运行步骤
 
 1. **准备文件**：将配置文件`DEG_config.tsv`和表达矩阵文件放到指定的输出路径中。
-2. **激活运行环境**：通过以下命令激活运行环境：
-   ```bash
-   conda activate /home/jianzhongxiang/miniconda3/envs/R44
-   ```
+2. **激活运行环境**：
+   首先需要安装好所有需要的依赖包
 3. **开始运行**：运行以下命令启动脚本：
    ```bash
-   nohup Rscript /data/jianzhongxiang/genome_sequence/100.RNA_seq.R &
+   Rscript 100.RNA_seq.R
    ```
 
 ## 输出结果
