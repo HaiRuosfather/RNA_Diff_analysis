@@ -15,7 +15,7 @@
    ```bash
    bash 011.install_pkg.sh
    ```
-4. **调整脚本路径**：在`100.RNA_seq.R`中，确保`source`函数路径指向`jzx_Function`库中的函数。
+4. **调整脚本路径**：在100.RNA_seq.R中，确保source函数路径指向jzx_Function库中的函数。
 
 ### 2. 配置文件
 配置文件`DEG_config.tsv`是运行分析的核心。请根据以下参数进行配置：
@@ -50,7 +50,7 @@
    ```
 3. **运行脚本**：
    ```bash
-   Rscript scripts/100.RNA_seq.R
+   Rscript 100.RNA_seq.R
    ```
 
 ## 输出结果
