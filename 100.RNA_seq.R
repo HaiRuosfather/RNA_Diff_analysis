@@ -8,11 +8,12 @@ library(ggrepel)
 library(pheatmap)
 library(reshape2)
 library(limma)
+melt <- reshape2::melt
 
 source('/data/panzhong/genome_sequence/000Seurat.functions.panzhong.version5.R')
 source('/data/jianzhongxiang/genome_sequence/000.Function.jzx.R')
 
-config<-read.delim('config.tsv')
+config<-read.delim('DEG_config.tsv')
 
 #读取参数
 GSE_number = config[1,2]
@@ -20,18 +21,20 @@ species = config[2,2]
 projectid = config[3,2]
 plotid = as.numeric(config[4,2])
 ID_type = config[5,2]
-g_test = config[6,2]
-g_control = config[7,2]
-pvalue_column = config[8,2]
-pvalue_cutoff = as.numeric(config[9,2])
-fc_cutoff = as.numeric(config[10,2])
-go_analysis = ifelse(config[11,2] == 'T',T,F)
-analysis_type = config[12,2]
+pvalue_column = config[6,2]
+pvalue_cutoff = as.numeric(config[7,2])
+fc_cutoff = as.numeric(config[8,2])
+go_analysis = ifelse(config[9,2] == 'T',T,F)
+analysis_type = config[10,2]
 
 
-df_sample <- config[-1:-14,-3]
+df_sample <- config[-1:-12,-3]
 colnames(df_sample) <- c('sample','group')
 rownames(df_sample) <- df_sample[,1]
+df_sample[,2]<-factor(df_sample[,2])
+
+g_test <- levels(df_sample[,2])[1]
+g_control <- levels(df_sample[,2])[2]
 
 if(grepl("GSE", GSE_number)){
   df_count <- get_array_data(GSE_number = GSE_number)
