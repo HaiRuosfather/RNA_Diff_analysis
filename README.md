@@ -34,11 +34,11 @@
 | species | 物种信息（支持人、小鼠、大鼠） |
 | projeid | 项目编号 |
 | plotid | 输出文件编号 |
-| ID_type | 原始数据的基因ID类型（如`SYMBOL`） |
+| ID_type | 原始数据的基因ID类型，如`SYMBOL` |
 | pvalue_column | 差异分析中p值的类型 |
 | pvalue_cutoff | p值筛选标准 |
 | FC_cutoff | 折变值（Fold Change）筛选标准 |
-| go_analysis | 是否进行GO/KEGG分析（`TRUE`或`FALSE`） |
+| go_analysis | 是否进行GO/KEGG分析`TRUE``FALSE`|
 | analysis_type | 分析方法 |
 | [sample_group] | 样本信息（样本名）和分组信息（分组名） |
 
