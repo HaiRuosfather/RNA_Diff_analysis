@@ -15,3 +15,4 @@ conda install bioconda::bioconductor-rgraphviz -y
 conda install bioconda::bioconductor-enrichplot -y
 conda install bioconda::bioconductor-clusterprofiler -y
 conda install bioconda::bioconductor-topgo -y
+conda install bioconda::bioconductor-org.hs.eg.db -y
