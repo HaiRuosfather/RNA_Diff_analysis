@@ -1428,6 +1428,58 @@ kegg_geneid_convert<-function(string,species = "human")
 		return(string_new)
 }
 
+ggplo2_kegg_barplot<-function(df_plot,name_column='Description',value_column='Enrichment',color_column='pvalue',
+							  ylab='Enrichment',title='Enrichment of KEGG Pathway',pw=7,ph=7.5,name_width=50,output_name='KEGG.barplot')
+{
+  library(stringr)
+  library(tidyverse)
+  library(ggplot2)
+  
+  rownames(df_plot)<-NULL
+  df_plot$index<-as.numeric(rownames(df_plot))
+  nlab<-max(nchar(df_plot[[name_column]]))
+  
+  plota<-NULL
+  plota <- ggplot(df_plot) + 
+	geom_bar(aes(x=reorder(.data[[name_column]],-index),y=.data[[value_column]],fill=-log10(.data[[color_column]])),stat='identity',width=0.8)
+  plota<-plota+theme(axis.text.x = element_text(size = 12,face='bold'))
+  plota<-plota+theme(axis.text.y = element_text(size = 12,face='bold')) 
+  plota<-plota+theme(axis.title.y=element_blank(),legend.position='right',axis.title.x=element_text(size = 15,face='bold'))
+  plota<-plota+labs(y=ylab,title=title)+scale_fill_gradient(low="blue",high="red")
+  plota<-plota+theme(axis.line = element_line(linewidth=1, colour = "black"))
+  plota<-plota+theme(panel.border = element_blank(),plot.title = element_text(size = 15,hjust=0.5, face="bold")) 
+  plota<-plota+theme(panel.grid =element_blank(),panel.background = element_blank())
+  plota<-plota+coord_flip()
+  plota<-plota+scale_y_continuous(expand=c(0,0))
+  plota<-plota+scale_x_discrete(labels=function(x) str_wrap(df_plot[[name_column]], width=name_width))
+  
+  ggsave(paste0(output_name,".tiff"), plot = plota, width = pw, height = ph,compression='lzw',limitsize=F)
+  ggsave(paste0(output_name,".pdf"), plot = plota, width = pw, height = ph)
+}
+
+ggplo2_kegg_dotplot<-function(df_plot,name_column='Description',value_column='GeneRatio',color_column='pvalue',size_column='Count',
+		                              xlab='GeneRatio',title='Enrichment of KEGG Pathway',pw=7,ph=7.5,name_width=50,output_name='KEGG.dotplot')
+{
+	  df_plot<-df_plot[order(df_plot[[value_column]]),]
+	  rownames(df_plot)<-NULL
+	  df_plot$index<-as.numeric(rownames(df_plot))
+	  
+	  plota<-NULL
+	  plota <- ggplot(df_plot) + 
+		geom_point(aes(x=.data[[value_column]],y=index,size=.data[[size_column]],col=-log10(.data[[color_column]])),alpha = 0.99, position = position_jitter(w = 0.0, h = 0.0))
+	  plota<-plota+theme(axis.text.x = element_text(size = 12,face='bold'))
+	  plota<-plota+theme(axis.text.y = element_text(size = 10,face='bold')) 
+	  plota<-plota+theme(axis.title.y=element_blank(),axis.title.x=element_text(size = 15,face='bold'),legend.position='right')
+	  plota<-plota+labs(x=xlab,title=title)+scale_colour_distiller(palette = "RdYlBu")
+	  #+scale_color_gradient(low="blue",high="red")
+	  plota<-plota+theme(axis.line = element_line(linewidth=1, colour = "black"))
+	  plota<-plota+theme(panel.border = element_blank(),plot.title = element_text(size = 15,hjust=0.5, face="bold")) 
+	  plota<-plota+theme(panel.grid =element_blank(),panel.background = element_blank())
+	  plota<-plota+scale_y_continuous(breaks=df_plot$index,labels= str_wrap(df_plot[[name_column]], width=name_width))
+	  ggsave(paste0(output_name,".tiff"), plot = plota, width = pw, height = ph,compression='lzw',limitsize=F)
+	  ggsave(paste0(output_name,".pdf"), plot = plota, width = pw, height = ph)
+}
+
 GO_jzx<-function(aaa,dir_output='GO_results',species = "human",go_pvalueCutoff=0.1,term_number=10,pw=10,ph=10,txtsize = 20)
 {
   library(ggplot2)
