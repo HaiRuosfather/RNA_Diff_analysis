@@ -1,11 +1,9 @@
 config	value	annotation
-GSE_number	GSE121372	NULL/your GSE_number
 species	human	human/mouse/rat
-projectid	GSE121372	any character
+projectid	GSE63678	any character
 plotid	1	any digit
+ID_cv	F	
 ID_type	SYMBOL	ENSEMBL/ENTREZID/SYMBOL
-g_test	H_24H	any character
-g_control	H_6H	any character
 pvalue_column	pvalue	pvalue/fdr
 pvalue_cutoff	0.05	0.05
 FC_cutoff	2	1 to 2
@@ -13,7 +11,13 @@ go_analysis	T	T/F
 analysis_type	limma	DESeq2/limma/Wilcoxon
 [ sample_group ]		
 sample	group	
-GSM3433438	H_24H	
-GSM3433439	H_24H	
-GSM3433436	H_6H	
-GSM3433437	H_6H	
+GSM1555075	CC	
+GSM1555076	CC	
+GSM1555077	CC	
+GSM1555078	CC	
+GSM1555079	CC	
+GSM1555080	NC	
+GSM1555081	NC	
+GSM1555082	NC	
+GSM1555083	NC	
+GSM1555084	NC	
